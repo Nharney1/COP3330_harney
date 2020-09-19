@@ -1,6 +1,6 @@
 public class BodyMassIndex {
 
-    public double bmi;
+    private double bmi;
     private String bmiCategory;
 
     public BodyMassIndex(double heightInput, double weightInput) {
@@ -23,10 +23,10 @@ public class BodyMassIndex {
             return "Obesity";
         } else if (bmi >= 25) {
             return "Overweight";
-        } else if (bmi > 18.5) {
+        } else if (bmi >18.5) {
             return "Normal Weight";
         } else
-            return "Underweight";
+            return"Underweight";
 
     }
 

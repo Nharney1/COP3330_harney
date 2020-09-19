@@ -89,7 +89,7 @@ public class App {
         double bmiTotal =0;
         int counter=0;
         for(BodyMassIndex eachBmiElement: bmiData){
-            bmiTotal += eachBmiElement.bmi;
+            bmiTotal += eachBmiElement.getBmi();
             counter++;
         }
 
