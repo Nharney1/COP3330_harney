@@ -1,79 +1,99 @@
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 class BodyMassIndexTest {
 
+        private BodyMassIndex bmiTester;
+
+        @BeforeEach
+        public void init(){
+              bmiTester = new BodyMassIndex(1000,1000);
+        }
+
         @Test
         public void testBmiCalculatorNormalNumbers1(){
-                BodyMassIndex bmiTester = new BodyMassIndex(50,50);
                 double output = bmiTester.bmiCalculator(50,50);
                 assertEquals(14.06, output);
         }
 
         @Test
         public void testBmiCalculatorNormalNumbers2(){
-                BodyMassIndex bmiTester = new BodyMassIndex(50,100);
                 double output = bmiTester.bmiCalculator(50,100);
                 assertEquals(28.12, output);
         }
 
         @Test
         public void testBmiCalculatorExtremeCase1(){
-                BodyMassIndex bmiTester = new BodyMassIndex(10,100);
                 double output = bmiTester.bmiCalculator(10,100);
                 assertEquals(703, output);
         }
 
         @Test
         public void testBmiCalculatorExtremeCase2(){
-                BodyMassIndex bmiTester = new BodyMassIndex(100000,100000);
                 double output = bmiTester.bmiCalculator(100,10);
                 assertEquals(.703, output);
         }
 
         @Test
         public void testBmiGetter(){
-                BodyMassIndex bmiTester = new BodyMassIndex(100,100);
                 double output = bmiTester.getBmi();
-                assertEquals(7.03, output);
+                assertEquals(.703, output);
         }
 
         @Test
-        public void testCategorySetter() {
-                BodyMassIndex bmiTester = new BodyMassIndex(100,100);
+        public void testCategoryGetter() {
                 String output = bmiTester.getCategory();
                 assertEquals("Underweight",output );
         }
 
         @Test
-            public void testCategoryObese(){
-                BodyMassIndex tester = new BodyMassIndex(10,1000);
-                assertEquals("Obesity", tester.getCategory());
-          }
+        public void testCategoryObese(){
+               String output = bmiTester.category(50);
+                assertEquals("Obesity", output);
+        }
+
+        @Test
+        public void testCategoryObeseBoundary(){
+                String output = bmiTester.category(29.9);
+                assertEquals("Overweight", output);
+        }
 
         @Test
         public void testCategoryOverweight(){
-                BodyMassIndex tester = new BodyMassIndex(70,180);
-                assertEquals("Overweight", tester.getCategory());
+                String output = bmiTester.category(27.5);
+                assertEquals("Overweight", output);
+        }
+
+        @Test
+        public void testCategoryOverweightBoundary(){
+                String output = bmiTester.category(24.9);
+                assertEquals("Normal weight", output);
         }
 
         @Test
         public void testCategoryNormalWeight(){
-                BodyMassIndex tester = new BodyMassIndex(70,170);
-                assertEquals("Normal Weight", tester.getCategory());
-        }
-        @Test
-        public void testCategoryUnderweight(){
-                BodyMassIndex tester = new BodyMassIndex(70,120);
-                assertEquals("Underweight", tester.getCategory());
+                String output = bmiTester.category(20);
+                assertEquals("Normal weight", output);
         }
 
-  /*      @Test
-        public void testCategoryMethodNOTWORKING(){
-                String output =
+        @Test
+        public void testCategoryNormalWeightBoundary(){
+                String output = bmiTester.category(18.51);
+                assertEquals("Normal weight", output);
+        }
+
+        @Test
+        public void testCategoryNormalWeightBoundary2(){
+                String output = bmiTester.category(18.5);
                 assertEquals("Underweight", output);
         }
-*/
+
+        @Test
+        public void testCategoryUnderweight(){
+                String output = bmiTester.category(5);
+                assertEquals("Underweight", output);
+        }
 
 }

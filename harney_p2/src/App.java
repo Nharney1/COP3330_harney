@@ -80,7 +80,7 @@ public class App {
 
     public static void displayBmiInfo(BodyMassIndex bmi){
 
-        System.out.println("This person has a BMI of: " + bmi.getBmi() + " \n");
+        System.out.printf( "%s %.1f %s", "This person has a BMI of: ", bmi.getBmi() , " \n");
         System.out.println("This person would be classified as: " + bmi.getCategory() + "\n");
 
     }
@@ -94,7 +94,7 @@ public class App {
         }
 
         if (counter != 0){
-            System.out.println("The average BMI for the inputted data is: " + bmiTotal/counter);
+            System.out.printf("%s %.1f", "The average BMI for the inputted data is" , bmiTotal/counter);
         }
         else {
             System.out.println("No BMI data was entered. The average BMI cannot be computed.");
