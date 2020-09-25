@@ -51,7 +51,7 @@ class BodyMassIndexTest {
         @Test
         public void testCategoryObese(){
                String output = bmiTester.category(50);
-                assertEquals("Obesity", output);
+                assertEquals("Obese", output);
         }
 
         @Test

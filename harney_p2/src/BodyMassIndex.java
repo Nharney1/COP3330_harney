@@ -20,7 +20,7 @@ public class BodyMassIndex {
 
     public String category(double inputBmi) {
         if (inputBmi >= 30) {
-            return "Obesity";
+            return "Obese";
         } else if (inputBmi >= 25) {
             return "Overweight";
         } else if (inputBmi > 18.5) {
