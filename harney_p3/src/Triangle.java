@@ -17,4 +17,5 @@ public class Triangle extends Shape2D {
     public double getArea(){
         return .5 * height * length;
     }
+
 }

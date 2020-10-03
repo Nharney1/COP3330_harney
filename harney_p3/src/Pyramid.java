@@ -30,7 +30,6 @@ public class Pyramid extends Shape3D {
         double slantHeight = Math.sqrt(sideLength / 2 * sideLength / 2 + heightInput * heightInput);
         return slantHeight;
     }
-
 }
 
 
