@@ -29,13 +29,13 @@ public class ShapeTest {
 
     @Test
     public void testTriangleArea(){
-        Shape shape = new Triangle(10,10);
+        Shape2D shape = new Triangle(10,10);
         assertEquals(50, shape.getArea());
     }
 
     @Test
     public void testTriangleArea2(){
-        Shape shape = new Triangle(0.5,0.25);
+        Shape2D shape = new Triangle(0.5,0.25);
         assertEquals(.063, shape.getArea(), 0.001);
     }
 
