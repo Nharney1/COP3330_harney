@@ -7,7 +7,7 @@ class TaskItemTest {
     @Test
     public void creatingTaskItemFailsWithInvalidTitle(){
         TaskItem a = new TaskItem("", "Description", "2020-11-11");
-        assertEquals("ERROR", a.getTitle());
+        assertEquals(null, a.getTitle());
     }
 
     @Test
@@ -18,13 +18,42 @@ class TaskItemTest {
 
     @Test
     public void creatingTaskItemFailsWithInvalidDueDate(){
-        TaskItem a = new TaskItem ("Some Title", "A description", "2020-00-10");
-        assertEquals("ERROR", a.setDueDate("6969"));
+        TaskItem a = new TaskItem ("Some Title", "A description", "9090");
+        assertEquals(null, a.getDueDate());
     }
 
     @Test
     public void creatingTaskItemSucceedsWithValidDueDate(){
         TaskItem a = new TaskItem("Some title", "A description", "2011-11-12");
-        assertEquals("2020-12-09", a.setDueDate("2020-12-09"));
+        assertEquals("2011-11-12", a.getDueDate());
     }
+
+    @Test
+    public void settingTaskItemDueDateFailsWithInvalidDate(){
+        TaskItem a = new TaskItem("Some title", "A description", "2011-11-12");
+        a.setDueDate("999__-99");
+        assertEquals("2011-11-12", a.getDueDate());
+    }
+
+    @Test
+    public void settingTaskItemDueDateSucceedsWithValidDate(){
+        TaskItem a = new TaskItem("Some title", "A description", "2011-11-12");
+        a.setDueDate("2020-20-20");
+        assertEquals("2020-20-20",a.getDueDate());
+    }
+
+    @Test
+    public void settingTaskItemTitleFailsWithInvalidTitle(){
+        TaskItem a = new TaskItem("Some title", "A description", "2011-11-12");
+        a.setTitle("");
+        assertEquals("Some title","Some title");
+    }
+    @Test
+    public void settingTaskItemTitleSucceedsWithValidTitle(){
+        TaskItem a = new TaskItem("Some title", "A description", "2011-11-12");
+        a.setTitle("Some new title");
+        assertEquals("Some new title", "Some new title");
+    }
+
+
 }

@@ -7,18 +7,16 @@ public class TaskItem {
     private String dueDate;
 
     public TaskItem(String inputTitle, String inputDescription, String inputDueDate) {
-        title = setTitle(inputTitle);
+        setTitle(inputTitle);
         description = inputDescription;
-        dueDate = setDueDate(inputDueDate);
+        setDueDate(inputDueDate);
     }
 
-
-
-    public String setTitle(String inputTitle) {
+    public void setTitle(String inputTitle) {
         if (inputTitle.length() >= 1) {
-            return inputTitle;
+            title = inputTitle;
         } else {
-            return "ERROR";
+            System.out.println("WARNING: Invalid title; must be at least 1 character long; task not created");
         }
     }
 
@@ -34,20 +32,20 @@ public class TaskItem {
         return description;
     }
 
-    public String setDueDate(String inputDueDate) {
+    public void setDueDate(String inputDueDate) {
 
         boolean isFormatTrue = true;
 
         if (inputDueDate.length() != 10){
-            return "ERROR";
+            System.out.println("WARNING: Invalid due date; task not created");
         }
         else {
             isFormatTrue = dueDateChecker(inputDueDate);
 
             if (isFormatTrue) {
-                return inputDueDate;
+                dueDate = inputDueDate;
             } else {
-                return "ERROR";
+                System.out.println("WARNING: Invalid due date; task not created");
             }
         }
     }
@@ -74,5 +72,10 @@ public class TaskItem {
 
     public String getDueDate(){
         return dueDate;
+    }
+
+    @Override
+    public String toString(){
+        return ("[" + getDueDate() + "]" + " " + getDescription() + " " + getTitle() + "\n");
     }
 }
