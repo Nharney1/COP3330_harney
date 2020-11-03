@@ -7,7 +7,7 @@ class TaskItemTest {
     @Test
     public void creatingTaskItemFailsWithInvalidTitle(){
         TaskItem a = new TaskItem("", "Description", "2020-11-11");
-        assertEquals(null, a.getTitle());
+        assertEquals(false, a.verifyTitle(""));
     }
 
     @Test
@@ -19,7 +19,7 @@ class TaskItemTest {
     @Test
     public void creatingTaskItemFailsWithInvalidDueDate(){
         TaskItem a = new TaskItem ("Some Title", "A description", "9090");
-        assertEquals(null, a.getDueDate());
+        assertEquals(false, a.verifyDueDate("9090"));
     }
 
     @Test
@@ -31,7 +31,9 @@ class TaskItemTest {
     @Test
     public void settingTaskItemDueDateFailsWithInvalidDate(){
         TaskItem a = new TaskItem("Some title", "A description", "2011-11-12");
-        a.setDueDate("999__-99");
+        if(a.verifyDueDate("999__-99")){
+            a.setDueDate("999__-99");
+        }
         assertEquals("2011-11-12", a.getDueDate());
     }
 

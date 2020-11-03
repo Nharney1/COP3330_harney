@@ -1,5 +1,3 @@
-import java.util.Scanner;
-
 public class TaskItem {
 
     private String title;
@@ -7,21 +5,26 @@ public class TaskItem {
     private String dueDate;
 
     public TaskItem(String inputTitle, String inputDescription, String inputDueDate) {
-        setTitle(inputTitle);
+        title = inputTitle;
         description = inputDescription;
-        setDueDate(inputDueDate);
+        dueDate = inputDueDate;
     }
 
     public void setTitle(String inputTitle) {
-        if (inputTitle.length() >= 1) {
-            title = inputTitle;
-        } else {
-            System.out.println("WARNING: Invalid title; must be at least 1 character long; task not created");
-        }
+        title = inputTitle;
     }
 
     public String getTitle() {
         return title;
+    }
+
+    public static boolean verifyTitle(String inputTitle){
+        if (inputTitle.length() >= 1) {
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
     public void setDescription(String inputDescription) {
@@ -33,24 +36,28 @@ public class TaskItem {
     }
 
     public void setDueDate(String inputDueDate) {
+        dueDate = inputDueDate;
 
+    }
+
+    public String getDueDate(){
+        return dueDate;
+    }
+
+    public static boolean verifyDueDate(String inputDueDate){
         boolean isFormatTrue = true;
 
-        if (inputDueDate.length() != 10){
-            System.out.println("WARNING: Invalid due date; task not created");
+        if (inputDueDate.length() != 10) {
+            return false;
         }
         else {
             isFormatTrue = dueDateChecker(inputDueDate);
 
-            if (isFormatTrue) {
-                dueDate = inputDueDate;
-            } else {
-                System.out.println("WARNING: Invalid due date; task not created");
-            }
+            return isFormatTrue;
         }
     }
 
-    public boolean dueDateChecker(String dueDate) {
+    public static boolean dueDateChecker(String dueDate) {
 
         int counter = 0;
         boolean isFormatCorrect = true;
@@ -68,10 +75,6 @@ public class TaskItem {
             counter++;
         }
         return isFormatCorrect;
-    }
-
-    public String getDueDate(){
-        return dueDate;
     }
 
     @Override

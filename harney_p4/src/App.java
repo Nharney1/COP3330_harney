@@ -95,7 +95,7 @@ public class App {
         switch (input) {
             case "1" -> TaskList.printToDoList();
             case "2" -> TaskList.addItemToList();
-            case "3" -> System.out.println(" Editing the list");
+            case "3" -> TaskList.getItemToEdit();
             case "4" -> TaskList.removeItem();
             case "5" -> System.out.print("marking an item as complete");
             case "6" -> System.out.println("unmarking an item as complete");
@@ -103,8 +103,6 @@ public class App {
             default ->  startupProcess();
         }
     }
-
-
 
 }
 
