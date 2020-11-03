@@ -3,16 +3,19 @@ import java.util.Scanner;
 
 public class App {
 
+    public static ArrayList <String> tempList = new ArrayList<>();
+
+
     public static void main (String[] args){
 
-        ArrayList<String>  tempList = new ArrayList<>();
-
-        tempList.add("First thing");
-        tempList.add("Second thing");
+  //      Boolean YouWillNeedToDeleteThisSoon = true;
 
         startupProcess();
 
-
+  /*      while(YouWillNeedToDeleteThisSoon){
+            createNewList();
+        }
+*/
     }
 
     public static void startupProcess(){
@@ -94,8 +97,8 @@ public class App {
 
     public static void processOperationMenuInput(String input){
         switch (input) {
-            case "1" -> printToDoList();
-            case "2" -> System.out.println("Adding to the list");
+            case "1" -> System.out.println(" Editing the list"); //printToDoList();
+            case "2" -> System.out.println(" Editing the list"); //addItemToList();
             case "3" -> System.out.println(" Editing the list");
             case "4" -> System.out.println("removing an item");
             case "5" -> System.out.print("marking an item as complete");
@@ -105,9 +108,16 @@ public class App {
         }
     }
 
-    public static void printToDoList(){
-
+  /*  public static void printToDoList(){
+       for( String things : templist){
+           System.out.println(things);
+       }
     }
-    
+
+    public static void addItemToList(){
+        templist.add("This is a test");
+        templist.add("This is also a test");
+    }
+*/
 }
 
