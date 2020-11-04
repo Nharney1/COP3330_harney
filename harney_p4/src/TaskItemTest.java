@@ -5,56 +5,81 @@ import static org.junit.jupiter.api.Assertions.*;
 class TaskItemTest {
 
     @Test
-    public void creatingTaskItemFailsWithInvalidTitle(){
-        TaskItem a = new TaskItem("", "Description", "2020-11-11");
-        assertEquals(false, a.verifyTitle(""));
+    public void settingTaskItemSucceedsWithValidTitle(){
+        TaskItem item = new TaskItem();
+        item.setTitle("This is the new title");
+        assertEquals("This is the new title", item.getTitle());
     }
 
     @Test
-    public void creatingTaskItemSucceedsWithValidTitle(){
-        TaskItem a = new TaskItem("Some Title", "Description", "2020-11-11");
-        assertEquals("Some Title", a.getTitle());
+    public void settingTaskItemFailsWithInvalidTitle(){
+       try {
+           TaskItem item = new TaskItem();
+           item.setTitle("");
+       }
+       catch (IllegalArgumentException ex) {
+           assertEquals("Title must be at least one character", ex.getMessage());
+       }
     }
 
     @Test
-    public void creatingTaskItemFailsWithInvalidDueDate(){
-        TaskItem a = new TaskItem ("Some Title", "A description", "9090");
-        assertEquals(false, a.verifyDueDate("9090"));
+    public void settingDueDateSucceedsWithValidDate(){
+        TaskItem item = new TaskItem();
+        item.setDueDate("2020-11-03");
+        assertEquals("2020-11-03", item.getDueDate());
+    }
+
+    @Test
+    public void settingDueDateFailsWithInvalidDate(){
+        try{
+            TaskItem item = new TaskItem();
+            item.setTitle("0909_ab-28");
+        }
+        catch (IllegalArgumentException ex){
+            assertEquals("Please use a valid date format", ex.getMessage());
+        }
     }
 
     @Test
     public void creatingTaskItemSucceedsWithValidDueDate(){
-        TaskItem a = new TaskItem("Some title", "A description", "2011-11-12");
-        assertEquals("2011-11-12", a.getDueDate());
+        TaskItem item = new TaskItem();
+        item.setTitle("New Item");
+        item.setDescription("");
+        item.setDueDate("2020-12-18");
+        assertEquals("Due Date 2020-12-18 Description  Title New Item", item.toString());
     }
 
     @Test
-    public void settingTaskItemDueDateFailsWithInvalidDate(){
-        TaskItem a = new TaskItem("Some title", "A description", "2011-11-12");
-        if(a.verifyDueDate("999__-99")){
-            a.setDueDate("999__-99");
+    public void creatingTaskItemSucceedsWithValidTitle(){
+        TaskItem item = new TaskItem();
+        item.setTitle("Valid Title");
+        item.setDescription("new todo");
+        item.setDueDate("2020-12-08");
+        assertEquals("Due Date 2020-12-08 Description new todo Title Valid Title", item.toString());
+    }
+
+    @Test
+    public void creatingTaskItemFailsWithInvalidDueDate() {
+        try {
+            TaskItem item = new TaskItem();
+            item.setTitle("New Item");
+            item.setDescription("");
+            item.setDueDate("sdfhb");
+        } catch (IllegalArgumentException ex) {
+            assertEquals("Please use a valid date format", ex.getMessage());
         }
-        assertEquals("2011-11-12", a.getDueDate());
     }
 
     @Test
-    public void settingTaskItemDueDateSucceedsWithValidDate(){
-        TaskItem a = new TaskItem("Some title", "A description", "2011-11-12");
-        a.setDueDate("2020-20-20");
-        assertEquals("2020-20-20",a.getDueDate());
-    }
-
-    @Test
-    public void settingTaskItemTitleFailsWithInvalidTitle(){
-        TaskItem a = new TaskItem("Some title", "A description", "2011-11-12");
-        a.setTitle("");
-        assertEquals("Some title","Some title");
-    }
-    @Test
-    public void settingTaskItemTitleSucceedsWithValidTitle(){
-        TaskItem a = new TaskItem("Some title", "A description", "2011-11-12");
-        a.setTitle("Some new title");
-        assertEquals("Some new title", "Some new title");
+    public void creatingTaskItemFailsWithInvalidTitle() {
+        try {
+            TaskItem item = new TaskItem();
+            item.setTitle("");
+            item.setDescription("");
+            item.setDueDate("sdfhb");                   // If title fails the date will not need to be checked
+        } catch (IllegalArgumentException ex) {
+            assertEquals("Title must be at least one character", ex.getMessage());
+        }
     }
 
 

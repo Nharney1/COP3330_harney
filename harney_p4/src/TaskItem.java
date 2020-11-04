@@ -1,84 +1,62 @@
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class TaskItem {
 
     private String title;
     private String description;
     private String dueDate;
 
-    public TaskItem(String inputTitle, String inputDescription, String inputDueDate) {
-        title = inputTitle;
-        description = inputDescription;
-        dueDate = inputDueDate;
-    }
-
-    public void setTitle(String inputTitle) {
-        title = inputTitle;
-    }
-
-    public String getTitle() {
+    public String getTitle(){
         return title;
     }
 
-    public static boolean verifyTitle(String inputTitle){
-        if (inputTitle.length() >= 1) {
-            return true;
+    public void setTitle(String title){
+        if (title.length() <1){
+            throw new IllegalArgumentException("Title must be at least one character");
         }
-        else {
-            return false;
-        }
+
+        this.title = title;
     }
 
-    public void setDescription(String inputDescription) {
-        description = inputDescription;
-    }
-
-    public String getDescription() {
+    public String getDescription(){
         return description;
     }
 
-    public void setDueDate(String inputDueDate) {
-        dueDate = inputDueDate;
-
+    public void setDescription(String description){
+        this.description = description;
     }
 
     public String getDueDate(){
         return dueDate;
     }
 
-    public static boolean verifyDueDate(String inputDueDate){
-        boolean isFormatTrue = true;
-
-        if (inputDueDate.length() != 10) {
-            return false;
+    public void setDueDate(String dueDate){
+        if (dateValidation(dueDate)){
+            this.dueDate = dueDate;
         }
         else {
-            isFormatTrue = dueDateChecker(inputDueDate);
-
-            return isFormatTrue;
+            throw new IllegalArgumentException("Please use a valid date format");
         }
     }
 
-    public static boolean dueDateChecker(String dueDate) {
+    public static boolean dateValidation(String dueDate){
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date tempDate = null;
+        dateFormat.setLenient(false);
 
-        int counter = 0;
-        boolean isFormatCorrect = true;
-
-        while (counter <= 9) {
-            if (counter == 4 || counter == 7) {
-                if (!(dueDate.charAt(counter) == '-')) {
-                    isFormatCorrect = false;
-                }
-            } else {
-                if (!Character.isDigit(dueDate.charAt(counter))) {
-                    isFormatCorrect = false;
-                }
-            }
-            counter++;
+        try {
+            tempDate = dateFormat.parse(dueDate);
+            return true;
         }
-        return isFormatCorrect;
+        catch (Exception ex){
+            return false;
+        }
     }
 
     @Override
     public String toString(){
-        return ("[" + getDueDate() + "]" + " " + getDescription() + " " + getTitle() + "\n");
+        return ("Due Date "  + getDueDate()  + " Description " + getDescription() + " Title " + getTitle() );
     }
 }
