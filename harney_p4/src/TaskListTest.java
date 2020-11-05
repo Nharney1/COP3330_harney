@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class TaskListTest {
 
-
     @Test
     public void addingTaskItemsIncreasesSize(){
         TaskItem item = new TaskItem();
@@ -331,6 +330,73 @@ class TaskListTest {
 
         } catch(IndexOutOfBoundsException ex){
             assertEquals("Index " + indexToRemove + " out of bounds for length " + TaskList.getListSize(), ex.getMessage());
+        }
+        TaskList.removeItem(0);
+    }
+
+    @Test
+    public void completingTaskItemChangesStatus(){
+        TaskItem item = new TaskItem();
+        item.setTitle("Title 1");
+        item.setDescription("Des 1");
+        item.setDueDate("2022-12-21");
+        TaskList.addItem(item);
+        TaskList.completeATask(0);
+
+        assertTrue(TaskList.getCompletionStatus(0));
+
+        TaskList.removeItem(0);
+    }
+
+    @Test
+    public void completingTaskItemFailsWithInvalidIndex(){
+
+        int indexToTry = 1;
+
+       try {
+
+           TaskItem item = new TaskItem();
+           item.setTitle("Title 1");
+           item.setDescription("Des 1");
+           item.setDueDate("2022-12-21");
+           TaskList.addItem(item);
+           TaskList.completeATask(indexToTry);
+       } catch (IndexOutOfBoundsException ex){
+           assertEquals("Index " + indexToTry + " out of bounds for length " + TaskList.getListSize(), ex.getMessage());
+       }
+        TaskList.removeItem(0);
+    }
+
+    @Test
+    public void unCompletingTaskItemChangesStatus(){
+        TaskItem item = new TaskItem();
+        item.setTitle("Title 1");
+        item.setDescription("Des 1");
+        item.setDueDate("2022-12-21");
+        TaskList.addItem(item);
+        TaskList.completeATask(0);
+
+        assertTrue(TaskList.getCompletionStatus(0));
+
+        TaskList.unCompleteATask(0);
+        assertFalse(TaskList.getCompletionStatus(0));
+
+        TaskList.removeItem(0);
+    }
+
+    @Test
+    public void unCompletingTaskItemFailsWithInvalidIndex(){
+        int indexToTry = 5;
+
+        try{
+            TaskItem item = new TaskItem();
+            item.setTitle("Title 1");
+            item.setDescription("Des 1");
+            item.setDueDate("2022-12-21");
+            TaskList.addItem(item);
+            TaskList.unCompleteATask(indexToTry);
+        } catch(IndexOutOfBoundsException ex){
+            assertEquals("Index " + indexToTry + " out of bounds for length " + TaskList.getListSize(), ex.getMessage());
         }
         TaskList.removeItem(0);
     }

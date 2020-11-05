@@ -7,6 +7,7 @@ public class TaskItem {
     private String title;
     private String description;
     private String dueDate;
+    private boolean completed = false;
 
     public String getTitle(){
         return title;
@@ -41,7 +42,7 @@ public class TaskItem {
         }
     }
 
-    public static boolean dateValidation(String dueDate){
+    private boolean dateValidation(String dueDate){
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date tempDate = null;
         dateFormat.setLenient(false);
@@ -58,5 +59,17 @@ public class TaskItem {
     @Override
     public String toString(){
         return ("Due Date "  + getDueDate()  + " Description " + getDescription() + " Title " + getTitle() );
+    }
+
+    public boolean getCompletionStatus(){
+        return completed;
+    }
+
+    public void completeTask(){
+        completed = true;
+    }
+
+    public void unCompleteTask(){
+        completed = false;
     }
 }

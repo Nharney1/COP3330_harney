@@ -89,4 +89,31 @@ public class TaskList {
         }
     }
 
+    public static void completeATask(int index){
+        try{
+            List.get(index).completeTask();
+        }
+        catch(IndexOutOfBoundsException ex){
+            System.out.println("The indexed item you are trying to complete does not exist");
+        }
+    }
+
+    public static boolean getCompletionStatus(int index) {
+        try{
+            return List.get(index).getCompletionStatus();
+        }
+        catch(IndexOutOfBoundsException ex){
+            System.out.println("The indexed item you are trying to get the status of does not exist");
+            return false;
+        }
+    }
+
+    public static void unCompleteATask(int index){
+        try{
+            List.get(index).unCompleteTask();
+        }
+        catch(IndexOutOfBoundsException ex){
+            System.out.println("The indexed item you are trying to uncomplete does not exist");
+        }
+    }
 }
