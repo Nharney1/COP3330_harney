@@ -1,4 +1,6 @@
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Formatter;
 
 public class TaskList {
 
@@ -13,19 +15,19 @@ public class TaskList {
     }
 
     public static void editItem(String title, String description, String dueDate, int index){
-        try {
             List.get(index);
+
+            //Ensures that none of the item details are changed when only 1 of the new inputs is bad
+            //Will throw an error that App catches before changing any values already stored in the
+            //Arraylist.
+            TaskItem validationItem = new TaskItem();
+            validationItem.setTitle(title);
+            validationItem.setDescription(description);
+            validationItem.setDueDate(dueDate);
+
             List.get(index).setTitle(title);
             List.get(index).setDueDate(dueDate);
             List.get(index).setDescription(description);
-        }
-        catch(IndexOutOfBoundsException ex) {
-            System.out.println("The indexed item you are trying to edit does not exist");
-        }
-         catch(IllegalArgumentException ex) {
-            System.out.println(ex.getMessage());
-        }
-
     }
 
     public static void removeItem(int index){
@@ -33,7 +35,7 @@ public class TaskList {
             List.remove(index);
         }
         catch(IndexOutOfBoundsException ex){
-            System.out.println("The indexed item you are trying to delete does not exist");
+            System.out.println("The indexed item you are trying to delete does not exist.");
         }
     }
 
@@ -115,12 +117,25 @@ public class TaskList {
 
         for(TaskItem item : List){
             if(item.getCompletionStatus()){
-                System.out.println("***");
+                System.out.print("*** ");
             }
-                        System.out.println(counter + ") " + item.toString() + "\n");
+                    System.out.println(counter + ") " + item.toString() + "\n");
             counter++;
         }
     }
 
+
+    public static void saveListToFile() {
+        try (
+                Formatter output = new Formatter("ToDoList.txt")) {
+            for (TaskItem item : List){
+                output.format(item.getDueDate() + ", " + item.getDescription() + ", " + item.getTitle() + ", " + "\n");
+            }
+            System.out.println("List successfully saved to file");
+        } catch (
+                IOException ex) {
+            System.out.println("Cannot open the file");
+        }
+    }
 
 }

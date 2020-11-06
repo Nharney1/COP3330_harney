@@ -1,3 +1,6 @@
+import java.io.IOException;
+import java.util.Formatter;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class App {
@@ -87,15 +90,14 @@ public class App {
             case "1" -> printTheList();
             case "2" -> getItemToAddItemToList();
             case "3" -> getItemToEdit();
-            case "4" -> System.out.println("Remove an item\n");
-            case "5" -> System.out.println("Mark an item as complete\n");
-            case "6" -> System.out.println("Unmark an item as complete\n");
-            case "7" -> System.out.println("Save the current list\n");
+            case "4" -> deleteItem();
+            case "5" -> completeItem();
+            case "6" -> unCompleteItem();
+            case "7" -> saveList();
             case "8" -> mainMenu();
             default -> System.out.println("You did not enter a valid option. Please try again\n");
         }
     }
-
 
 
 
@@ -149,29 +151,31 @@ public class App {
     }
 
     private static void getItemToEdit(){
+        try {
+            TaskList.printListWithFormat();
 
-        TaskList.printListWithFormat();
+            Scanner input = new Scanner(System.in);
 
-        Scanner input = new Scanner(System.in);
+            String tempTitle, tempDescription, tempDueDate;
+            int index;
 
-        String tempTitle, tempDescription, tempDueDate;
-        int index;
+            System.out.println("Which item number would you like to edit");
+            index = input.nextInt();
+            input.nextLine();
 
-        System.out.println("Which item number would you like to edit");
-        index = input.nextInt();
-        input.nextLine();
+            System.out.println("Please enter a title");
+            tempTitle = input.nextLine();
 
-        System.out.println("Please enter a title");
-        tempTitle = input.nextLine();
+            System.out.println("Please enter a description");
+            tempDescription = input.nextLine();
 
-        System.out.println("Please enter a description");
-        tempDescription = input.nextLine();
+            System.out.println("Please enter a due date");
+            tempDueDate = input.nextLine();
 
-        System.out.println("Please enter a due date");
-        tempDueDate = input.nextLine();
-
-        editItem(tempTitle, tempDescription, tempDueDate, index);
-
+            editItem(tempTitle, tempDescription, tempDueDate, index);
+        } catch (InputMismatchException ex){
+            System.out.println("ERROR: Please enter your option as a digit.\n");
+        }
     }
 
     private static void editItem(String tempTitle, String tempDescription, String tempDueDate, int index){
@@ -180,10 +184,63 @@ public class App {
             System.out.println("The item has been edited successfully\n");
         }
         catch (IndexOutOfBoundsException ex){
+            System.out.println("The item you are trying to edit does not exist.");
         }
         catch (IllegalArgumentException ex){
             System.out.println(ex.getMessage());
         }
+    }
+
+    private static void deleteItem(){
+
+        try {
+            TaskList.printListWithFormat();
+
+            Scanner input = new Scanner(System.in);
+
+            int index;
+
+            System.out.println("Which item number would you like to delete");
+            index = input.nextInt();
+            input.nextLine();
+
+            TaskList.removeItem(index);
+        } catch (InputMismatchException ex){
+            System.out.println("ERROR: Please enter your option as a digit.\n");
+        }
+
+    }
+
+    private static void completeItem(){
+        TaskList.printListWithFormat();
+
+        Scanner input = new Scanner(System.in);
+
+        int index;
+
+        System.out.println("Which item number would you like to complete");
+        index = input.nextInt();
+        input.nextLine();
+
+        TaskList.completeATask(index);
+    }
+
+    private static void unCompleteItem(){
+        TaskList.printListWithFormat();
+
+        Scanner input = new Scanner(System.in);
+
+        int index;
+
+        System.out.println("Which item number would you like to complete");
+        index = input.nextInt();
+        input.nextLine();
+
+        TaskList.unCompleteATask(index);
+    }
+
+    private static void saveList() {
+        TaskList.saveListToFile();
     }
 }
 

@@ -18,7 +18,7 @@ class TaskItemTest {
            item.setTitle("");
        }
        catch (IllegalArgumentException ex) {
-           assertEquals("WARNING: Title must be at least one character. Item not added.", ex.getMessage());
+           assertEquals("WARNING: Title must be at least one character. Item not added.\n", ex.getMessage());
        }
     }
 
@@ -66,7 +66,7 @@ class TaskItemTest {
             item.setDescription("");
             item.setDueDate("sdfhb");
         } catch (IllegalArgumentException ex) {
-            assertEquals("WARNING: Please use a valid date format. Item not added.", ex.getMessage());
+            assertEquals("WARNING: Please use a valid date format. Item not added.\n", ex.getMessage());
         }
     }
 
@@ -78,7 +78,7 @@ class TaskItemTest {
             item.setDescription("");
             item.setDueDate("sdfhb");                   // If title fails the date will not need to be checked
         } catch (IllegalArgumentException ex) {
-            assertEquals("WARNING: Title must be at least one character. Item not added.", ex.getMessage());
+            assertEquals("WARNING: Title must be at least one character. Item not added.\n", ex.getMessage());
         }
     }
 

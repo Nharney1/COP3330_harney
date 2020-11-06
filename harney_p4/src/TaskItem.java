@@ -15,7 +15,7 @@ public class TaskItem {
 
     public void setTitle(String title){
         if (title.length() <1){
-            throw new IllegalArgumentException("WARNING: Title must be at least one character. Item not added.");
+            throw new IllegalArgumentException("WARNING: Title must be at least one character. Item not added.\n");
         }
 
         this.title = title;
@@ -38,7 +38,7 @@ public class TaskItem {
             this.dueDate = dueDate;
         }
         else {
-            throw new IllegalArgumentException("WARNING: Please use a valid date format. Item not added.");
+            throw new IllegalArgumentException("WARNING: Please use a valid date format. Item not added.\n");
         }
     }
 
@@ -72,4 +72,5 @@ public class TaskItem {
     public void unCompleteTask(){
         completed = false;
     }
+
 }
