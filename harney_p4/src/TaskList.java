@@ -15,24 +15,17 @@ public class TaskList {
     public static void editItem(String title, String description, String dueDate, int index){
         try {
             List.get(index);
+            List.get(index).setTitle(title);
+            List.get(index).setDueDate(dueDate);
+            List.get(index).setDescription(description);
         }
-        catch(IndexOutOfBoundsException ex){
+        catch(IndexOutOfBoundsException ex) {
             System.out.println("The indexed item you are trying to edit does not exist");
         }
-        try{
-            List.get(index).setTitle(title);
-        }
-        catch(IllegalArgumentException ex){
-            System.out.println("Please enter a valid title");
-        }
-        try {
-            List.get(index).setDueDate(dueDate);
-        }
-        catch (IllegalArgumentException ex){
-            System.out.println("Please enter a valid due date");
+         catch(IllegalArgumentException ex) {
+            System.out.println(ex.getMessage());
         }
 
-        List.get(index).setDescription(description);
     }
 
     public static void removeItem(int index){
@@ -116,4 +109,18 @@ public class TaskList {
             System.out.println("The indexed item you are trying to uncomplete does not exist");
         }
     }
+
+    public static void printListWithFormat(){
+        int counter = 0;
+
+        for(TaskItem item : List){
+            if(item.getCompletionStatus()){
+                System.out.println("***");
+            }
+                        System.out.println(counter + ") " + item.toString() + "\n");
+            counter++;
+        }
+    }
+
+
 }

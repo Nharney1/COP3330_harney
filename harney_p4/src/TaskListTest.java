@@ -32,7 +32,7 @@ class TaskListTest {
 
 
         TaskList.editItem("New Valid Title", "description", "2020-01-01", 1);
-        assertEquals("Due Date 2020-01-01 Description description Title New Valid Title", item2.toString());
+        assertEquals("2020-01-01 description New Valid Title", item2.toString());
         TaskList.removeItem(0);
         TaskList.removeItem(0);
     }
@@ -47,7 +47,7 @@ class TaskListTest {
         System.out.println(TaskList.getListSize());
 
         item.setDescription("New description");
-        assertEquals("Due Date 2020-12-08 Description New description Title Valid Title", item.toString());
+        assertEquals("2020-12-08 New description Valid Title", item.toString());
         TaskList.removeItem(0);
     }
 
@@ -66,7 +66,7 @@ class TaskListTest {
         TaskList.addItem(item2);
 
         TaskList.editItem("New Valid Title", "description", "2020-12-12", 1);
-        assertEquals("Due Date 2020-12-12 Description description Title New Valid Title", item2.toString());
+        assertEquals("2020-12-12 description New Valid Title", item2.toString());
         TaskList.removeItem(0);
         TaskList.removeItem(0);
     }
@@ -80,7 +80,7 @@ class TaskListTest {
         TaskList.addItem(item);
 
         TaskList.editItem("Not Cool Title", "description", "2020-11-21", 0);
-        assertEquals("Due Date 2020-11-21 Description description Title Not Cool Title", item.toString());
+        assertEquals("2020-11-21 description Not Cool Title", item.toString());
         TaskList.removeItem(0);
     }
 
@@ -400,4 +400,6 @@ class TaskListTest {
         }
         TaskList.removeItem(0);
     }
+
+
 }

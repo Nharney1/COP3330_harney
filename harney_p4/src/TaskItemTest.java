@@ -18,7 +18,7 @@ class TaskItemTest {
            item.setTitle("");
        }
        catch (IllegalArgumentException ex) {
-           assertEquals("Title must be at least one character", ex.getMessage());
+           assertEquals("WARNING: Title must be at least one character. Item not added.", ex.getMessage());
        }
     }
 
@@ -36,7 +36,7 @@ class TaskItemTest {
             item.setTitle("0909_ab-28");
         }
         catch (IllegalArgumentException ex){
-            assertEquals("Please use a valid date format", ex.getMessage());
+            assertEquals("WARNING: Please use a valid date format. Item not added.", ex.getMessage());
         }
     }
 
@@ -46,7 +46,7 @@ class TaskItemTest {
         item.setTitle("New Item");
         item.setDescription("");
         item.setDueDate("2020-12-18");
-        assertEquals("Due Date 2020-12-18 Description  Title New Item", item.toString());
+        assertEquals("2020-12-18  New Item", item.toString());
     }
 
     @Test
@@ -55,7 +55,7 @@ class TaskItemTest {
         item.setTitle("Valid Title");
         item.setDescription("new todo");
         item.setDueDate("2020-12-08");
-        assertEquals("Due Date 2020-12-08 Description new todo Title Valid Title", item.toString());
+        assertEquals("2020-12-08 new todo Valid Title", item.toString());
     }
 
     @Test
@@ -66,7 +66,7 @@ class TaskItemTest {
             item.setDescription("");
             item.setDueDate("sdfhb");
         } catch (IllegalArgumentException ex) {
-            assertEquals("Please use a valid date format", ex.getMessage());
+            assertEquals("WARNING: Please use a valid date format. Item not added.", ex.getMessage());
         }
     }
 
@@ -78,7 +78,7 @@ class TaskItemTest {
             item.setDescription("");
             item.setDueDate("sdfhb");                   // If title fails the date will not need to be checked
         } catch (IllegalArgumentException ex) {
-            assertEquals("Title must be at least one character", ex.getMessage());
+            assertEquals("WARNING: Title must be at least one character. Item not added.", ex.getMessage());
         }
     }
 
