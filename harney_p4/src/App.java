@@ -1,6 +1,9 @@
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Formatter;
 import java.util.InputMismatchException;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class App {
@@ -38,7 +41,7 @@ public class App {
                 operationMenu();
             }
             else if (userInput.equals("2")){
-                System.out.println("load an existing list");
+                readItemsFromFile();
             }
             else if (userInput.equals("3")){
                 System.exit(0);
@@ -241,6 +244,47 @@ public class App {
 
     private static void saveList() {
         TaskList.saveListToFile();
+    }
+
+    private static void readItemsFromFile(){
+
+        Scanner reader;
+
+        try{
+            reader = new Scanner (new File("ToDoList.txt"));
+            reader.useDelimiter(",|\\n");
+
+
+            while(reader.hasNextLine()) {
+
+                String tempDueDate = reader.next();
+                String tempDescription = reader.next();
+                String tempTitle = reader.next();
+
+
+                System.out.print(tempDueDate + " ");
+                System.out.print(tempDescription + " ");
+                System.out.print(tempTitle + " ");
+                System.out.print("\n\n");
+
+                addItemToList(tempTitle, tempDescription, tempDueDate);
+
+            }
+        }
+
+        catch(NoSuchElementException ex){
+            System.out.println("Your list has been loaded successfully\n");
+        }
+        catch(FileNotFoundException ex){
+            System.out.println("WARNING: Cannot find the file you have.\n");
+        }
+        catch(IOException ex){
+            System.out.println("IOException: Cannot open the file you have.\n");
+        }
+        catch (Exception ex){
+            System.out.println("WARNING: Issue opening the file.\n");
+        }
+
     }
 }
 

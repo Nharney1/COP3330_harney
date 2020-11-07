@@ -26,8 +26,9 @@ public class TaskList {
             validationItem.setDueDate(dueDate);
 
             List.get(index).setTitle(title);
-            List.get(index).setDueDate(dueDate);
             List.get(index).setDescription(description);
+            List.get(index).setDueDate(dueDate);
+
     }
 
     public static void removeItem(int index){
@@ -129,12 +130,12 @@ public class TaskList {
         try (
                 Formatter output = new Formatter("ToDoList.txt")) {
             for (TaskItem item : List){
-                output.format(item.getDueDate() + ", " + item.getDescription() + ", " + item.getTitle() + ", " + "\n");
+                output.format(item.getDueDate() + "," + item.getDescription() + "," + item.getTitle() + "\n");
             }
-            System.out.println("List successfully saved to file");
+            System.out.println("List successfully saved to file.\n");
         } catch (
                 IOException ex) {
-            System.out.println("Cannot open the file");
+            System.out.println("Cannot open the file.\n");
         }
     }
 
