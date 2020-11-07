@@ -1,5 +1,10 @@
 import org.junit.jupiter.api.Test;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.NoSuchElementException;
+import java.util.Scanner;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class TaskListTest {
@@ -401,6 +406,33 @@ class TaskListTest {
         TaskList.removeItem(0);
     }
 
+    @Test
+    public void savedTaskListCanBeLoaded(){
+        TaskItem item = new TaskItem();
+        item.setTitle("New Item");
+        item.setDescription("");
+        item.setDueDate("2020-12-18");
+
+        Scanner reader;
+
+        try{
+            reader = new Scanner (new File("ToDoList.txt"));
+            reader.useDelimiter(",|\\n");
 
 
+            while(reader.hasNextLine()) {
+
+                String tempDueDate = reader.next();
+                String tempDescription = reader.next();
+                String tempTitle = reader.next();
+
+                App.addItemToList(tempTitle, tempDescription, tempDueDate);
+
+            }
+        }
+        catch(NoSuchElementException | FileNotFoundException ex){
+            System.out.println("Your list has been loaded successfully\n");
+        }
+        TaskList.removeItem(0);
+    }
 }

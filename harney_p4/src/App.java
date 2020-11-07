@@ -1,7 +1,6 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Formatter;
 import java.util.InputMismatchException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
@@ -138,7 +137,7 @@ public class App {
 
     }
 
-    private static void addItemToList(String tempTitle, String tempDescription, String tempDueDate){
+    public static void addItemToList(String tempTitle, String tempDescription, String tempDueDate){
         try {
             TaskItem item = new TaskItem();
             item.setTitle(tempTitle);
@@ -246,7 +245,7 @@ public class App {
         TaskList.saveListToFile();
     }
 
-    private static void readItemsFromFile(){
+    public static void readItemsFromFile(){
 
         Scanner reader;
 
@@ -260,12 +259,6 @@ public class App {
                 String tempDueDate = reader.next();
                 String tempDescription = reader.next();
                 String tempTitle = reader.next();
-
-
-                System.out.print(tempDueDate + " ");
-                System.out.print(tempDescription + " ");
-                System.out.print(tempTitle + " ");
-                System.out.print("\n\n");
 
                 addItemToList(tempTitle, tempDescription, tempDueDate);
 
