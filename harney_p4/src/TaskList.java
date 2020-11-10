@@ -36,7 +36,7 @@ public class TaskList {
             List.remove(index);
         }
         catch(IndexOutOfBoundsException ex){
-            System.out.println("The indexed item you are trying to delete does not exist.");
+            System.out.println("The indexed item you are trying to delete does not exist.\n");
         }
     }
 

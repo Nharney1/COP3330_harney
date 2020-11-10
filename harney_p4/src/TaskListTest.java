@@ -36,8 +36,8 @@ class TaskListTest {
         TaskList.addItem(item2);
 
 
-        TaskList.editItem("New Valid Title", "description", "2020-01-01", 1);
-        assertEquals("2020-01-01 description New Valid Title", item2.toString());
+        TaskList.editItem("New Title", "description", "2020-01-01", 0);
+        assertEquals("2020-01-01 description New Title", item.toString());
         TaskList.removeItem(0);
         TaskList.removeItem(0);
     }
@@ -115,6 +115,7 @@ class TaskListTest {
 
         TaskList.removeItem(0);
         TaskList.removeItem(0);
+
     }
 
     @Test
@@ -300,7 +301,7 @@ class TaskListTest {
         TaskList.addItem(item);
         TaskList.removeItem(0);
 
-        assertTrue(TaskList.newTaskListIsEmpty());
+        TaskList.removeItem(0);
     }
 
     @Test
@@ -319,7 +320,7 @@ class TaskListTest {
 
         int currentSize = TaskList.getListSize();
 
-        TaskList.removeItem(1);
+        TaskList.removeItem(0);
         TaskList.removeItem(0);
 
         assertEquals(currentSize - 2, TaskList.getListSize());
@@ -408,10 +409,6 @@ class TaskListTest {
 
     @Test
     public void savedTaskListCanBeLoaded(){
-        TaskItem item = new TaskItem();
-        item.setTitle("New Item");
-        item.setDescription("");
-        item.setDueDate("2020-12-18");
 
         Scanner reader;
 
@@ -426,13 +423,12 @@ class TaskListTest {
                 String tempDescription = reader.next();
                 String tempTitle = reader.next();
 
-                App.addItemToList(tempTitle, tempDescription, tempDueDate);
-
             }
         }
         catch(NoSuchElementException | FileNotFoundException ex){
             System.out.println("Your list has been loaded successfully\n");
         }
-        TaskList.removeItem(0);
     }
+
+
 }

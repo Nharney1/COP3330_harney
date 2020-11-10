@@ -104,7 +104,12 @@ public class App {
 
 
     private static void printTheList(){
-        TaskList.printListWithFormat();
+        if(TaskList.newTaskListIsEmpty()){
+            System.out.println("The list is empty. Please add items.\n");
+        }
+        else{
+            TaskList.printListWithFormat();
+        }
     }
 
     private static void operationMenu(){
@@ -133,8 +138,6 @@ public class App {
 
         addItemToList(tempTitle, tempDescription, tempDueDate);
 
-
-
     }
 
     public static void addItemToList(String tempTitle, String tempDescription, String tempDueDate){
@@ -154,27 +157,33 @@ public class App {
 
     private static void getItemToEdit(){
         try {
-            TaskList.printListWithFormat();
 
-            Scanner input = new Scanner(System.in);
+            if(TaskList.newTaskListIsEmpty()){
+                System.out.println("The list is empty. There are no items to edit.\n");
+            }
+            else {
+                TaskList.printListWithFormat();
 
-            String tempTitle, tempDescription, tempDueDate;
-            int index;
+                Scanner input = new Scanner(System.in);
 
-            System.out.println("Which item number would you like to edit");
-            index = input.nextInt();
-            input.nextLine();
+                String tempTitle, tempDescription, tempDueDate;
+                int index;
 
-            System.out.println("Please enter a title");
-            tempTitle = input.nextLine();
+                System.out.println("Which item number would you like to edit");
+                index = input.nextInt();
+                input.nextLine();
 
-            System.out.println("Please enter a description");
-            tempDescription = input.nextLine();
+                System.out.println("Please enter a title");
+                tempTitle = input.nextLine();
 
-            System.out.println("Please enter a due date");
-            tempDueDate = input.nextLine();
+                System.out.println("Please enter a description");
+                tempDescription = input.nextLine();
 
-            editItem(tempTitle, tempDescription, tempDueDate, index);
+                System.out.println("Please enter a due date");
+                tempDueDate = input.nextLine();
+
+                editItem(tempTitle, tempDescription, tempDueDate, index);
+            }
         } catch (InputMismatchException ex){
             System.out.println("ERROR: Please enter your option as a digit.\n");
         }
@@ -186,7 +195,7 @@ public class App {
             System.out.println("The item has been edited successfully\n");
         }
         catch (IndexOutOfBoundsException ex){
-            System.out.println("The item you are trying to edit does not exist.");
+            System.out.println("The item you are trying to edit does not exist.\n");
         }
         catch (IllegalArgumentException ex){
             System.out.println(ex.getMessage());
@@ -196,49 +205,89 @@ public class App {
     private static void deleteItem(){
 
         try {
-            TaskList.printListWithFormat();
+            if(TaskList.newTaskListIsEmpty()){
+                System.out.println("The list is empty. There are no items to delete.\n");
+            }
+            else {
 
-            Scanner input = new Scanner(System.in);
+                TaskList.printListWithFormat();
 
-            int index;
+                Scanner input = new Scanner(System.in);
 
-            System.out.println("Which item number would you like to delete");
-            index = input.nextInt();
-            input.nextLine();
+                int index;
 
-            TaskList.removeItem(index);
+                System.out.println("Which item number would you like to delete");
+                index = input.nextInt();
+                input.nextLine();
+
+                TaskList.removeItem(index);
+            }
         } catch (InputMismatchException ex){
-            System.out.println("ERROR: Please enter your option as a digit.\n");
+            System.out.println("ERROR: Please enter the item you want to delete as a digit.\n");
         }
 
     }
 
     private static void completeItem(){
-        TaskList.printListWithFormat();
+      try {
 
-        Scanner input = new Scanner(System.in);
+          if (TaskList.newTaskListIsEmpty()){
+              System.out.println("There are no items to complete. The list is empty.\n");
+          }
+          else {
+              TaskList.printListWithFormat();
 
-        int index;
+              Scanner input = new Scanner(System.in);
 
-        System.out.println("Which item number would you like to complete");
-        index = input.nextInt();
-        input.nextLine();
+              int index;
 
-        TaskList.completeATask(index);
+              System.out.println("Which item number would you like to complete");
+              index = input.nextInt();
+              input.nextLine();
+
+              if (index+1 <= TaskList.getListSize()) {
+                  TaskList.completeATask(index);
+
+                  System.out.println("Item marked as complete\n");
+              }
+              else {
+                  System.out.println("The item you are trying to complete does not exist.\n");
+              }
+          }
+      }
+      catch(InputMismatchException ex){
+          System.out.println("ERROR: Please enter the item you want to complete as a digit.\n");
+      }
     }
 
     private static void unCompleteItem(){
-        TaskList.printListWithFormat();
+        try {
 
-        Scanner input = new Scanner(System.in);
+            if (TaskList.newTaskListIsEmpty()) {
+                System.out.println("There are no items to uncomplete. The list is empty.\n");
+            } else {
+                TaskList.printListWithFormat();
 
-        int index;
+                Scanner input = new Scanner(System.in);
 
-        System.out.println("Which item number would you like to complete");
-        index = input.nextInt();
-        input.nextLine();
+                int index;
 
-        TaskList.unCompleteATask(index);
+                System.out.println("Which item number would you like to complete");
+                index = input.nextInt();
+                input.nextLine();
+        if(index+1 <= TaskList.getListSize()) {
+            TaskList.unCompleteATask(index);
+
+            System.out.println("Item unmarked as complete\n");
+        }
+        else {
+            System.out.println("The item you are trying to unmark as complete does not exist.\n");
+        }
+            }
+        }
+        catch(InputMismatchException ex){
+            System.out.println("ERROR: Please enter the item you want to uncomplete as a digit.\n");
+        }
     }
 
     private static void saveList() {
@@ -266,18 +315,14 @@ public class App {
         }
 
         catch(NoSuchElementException ex){
-            System.out.println("Your list has been loaded successfully\n");
+            //Exception for writing to files
         }
         catch(FileNotFoundException ex){
             System.out.println("WARNING: Cannot find the file you have.\n");
         }
-        catch(IOException ex){
-            System.out.println("IOException: Cannot open the file you have.\n");
-        }
-        catch (Exception ex){
+       catch (Exception ex){
             System.out.println("WARNING: Issue opening the file.\n");
         }
-
     }
 }
 
