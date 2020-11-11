@@ -4,7 +4,7 @@ import java.util.Formatter;
 
 public class TaskList {
 
-    public static ArrayList<TaskItem> List = new ArrayList<>();
+    private static ArrayList<TaskItem> List = new ArrayList<>();
 
     public static void addItem(TaskItem newItem){
         List.add(newItem);
@@ -41,39 +41,23 @@ public class TaskList {
     }
 
     public static String getDescription (int index){
-        try{
+
             List.get(index);
 
             return List.get(index).getDescription();
-        }
-        catch(IndexOutOfBoundsException ex){
-            System.out.println("The indexed item you are trying to retrieve does not exist");
-            return ("The indexed item you are trying to retrieve does not exist");
-        }
     }
 
     public static String getDueDate (int index){
-        try{
             List.get(index);
 
             return List.get(index).getDueDate();
-        }
-        catch(IndexOutOfBoundsException ex){
-            System.out.println("The indexed item you are trying to retrieve does not exist");
-            return ("The indexed item you are trying to retrieve does not exist");
-        }
     }
 
     public static String getTitle(int index){
-        try{
             List.get(index);
 
             return List.get(index).getTitle();
-        }
-        catch(IndexOutOfBoundsException ex){
-            System.out.println("The indexed item you are trying to retrieve does not exist");
-            return ("The indexed item you are trying to retrieve does not exist");
-        }
+
     }
 
     public static boolean newTaskListIsEmpty(){
@@ -86,12 +70,8 @@ public class TaskList {
     }
 
     public static void completeATask(int index){
-        try{
             List.get(index).completeTask();
-        }
-        catch(IndexOutOfBoundsException ex){
-            System.out.println("The indexed item you are trying to complete does not exist");
-        }
+
     }
 
     public static boolean getCompletionStatus(int index) {
@@ -105,12 +85,7 @@ public class TaskList {
     }
 
     public static void unCompleteATask(int index){
-        try{
             List.get(index).unCompleteTask();
-        }
-        catch(IndexOutOfBoundsException ex){
-            System.out.println("The indexed item you are trying to uncomplete does not exist");
-        }
     }
 
     public static void printListWithFormat(){
@@ -124,7 +99,6 @@ public class TaskList {
             counter++;
         }
     }
-
 
     public static void saveListToFile() {
         try (

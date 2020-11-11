@@ -13,13 +13,10 @@ class TaskItemTest {
 
     @Test
     public void settingTaskItemFailsWithInvalidTitle(){
-       try {
+       assertThrows(IllegalArgumentException.class, ()-> {
            TaskItem item = new TaskItem();
            item.setTitle("");
-       }
-       catch (IllegalArgumentException ex) {
-           assertEquals("WARNING: Title must be at least one character. Item not added.\n", ex.getMessage());
-       }
+       });
     }
 
     @Test
@@ -31,13 +28,11 @@ class TaskItemTest {
 
     @Test
     public void settingDueDateFailsWithInvalidDate(){
-        try{
+        assertThrows(IllegalArgumentException.class, ()-> {
             TaskItem item = new TaskItem();
-            item.setTitle("0909_ab-28");
-        }
-        catch (IllegalArgumentException ex){
-            assertEquals("WARNING: Please use a valid date format. Item not added.", ex.getMessage());
-        }
+            item.setDueDate("0909_ab-28");
+        });
+
     }
 
     @Test
@@ -60,26 +55,22 @@ class TaskItemTest {
 
     @Test
     public void creatingTaskItemFailsWithInvalidDueDate() {
-        try {
+        assertThrows(IllegalArgumentException.class, ()-> {
             TaskItem item = new TaskItem();
             item.setTitle("New Item");
             item.setDescription("");
             item.setDueDate("sdfhb");
-        } catch (IllegalArgumentException ex) {
-            assertEquals("WARNING: Please use a valid date format. Item not added.\n", ex.getMessage());
-        }
+        });
     }
 
     @Test
     public void creatingTaskItemFailsWithInvalidTitle() {
-        try {
+        assertThrows(IllegalArgumentException.class, ()-> {
             TaskItem item = new TaskItem();
             item.setTitle("");
             item.setDescription("");
             item.setDueDate("sdfhb");                   // If title fails the date will not need to be checked
-        } catch (IllegalArgumentException ex) {
-            assertEquals("WARNING: Title must be at least one character. Item not added.\n", ex.getMessage());
-        }
+        });
     }
 
 

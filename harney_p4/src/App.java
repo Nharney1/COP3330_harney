@@ -1,6 +1,5 @@
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
@@ -36,17 +35,11 @@ public class App {
 
     private static void actOnMainMenuInput(String userInput){
         try{
-            if(userInput.equals("1")){
-                operationMenu();
-            }
-            else if (userInput.equals("2")){
-                readItemsFromFile();
-            }
-            else if (userInput.equals("3")){
-                System.exit(0);
-            }
-            else {
-                throw new IllegalArgumentException();
+            switch (userInput) {
+                case "1" -> operationMenu();
+                case "2" -> readItemsFromFile();
+                case "3" -> System.exit(0);
+                default -> throw new IllegalArgumentException();
             }
         } catch(IllegalArgumentException ex){
             System.out.println("Please enter a valid selection for the main menu options\n\n");
@@ -97,7 +90,7 @@ public class App {
             case "6" -> unCompleteItem();
             case "7" -> saveList();
             case "8" -> mainMenu();
-            default -> System.out.println("You did not enter a valid option. Please try again\n");
+            default -> System.out.println("You did not enter a valid option. Please try again.\n");
         }
     }
 
@@ -127,13 +120,13 @@ public class App {
 
         String tempTitle, tempDescription, tempDueDate;
 
-        System.out.println("Please enter a title");
+        System.out.println("Please enter a title:");
         tempTitle = input.nextLine();
 
-        System.out.println("Please enter a description");
+        System.out.println("Please enter a description:");
         tempDescription = input.nextLine();
 
-        System.out.println("Please enter a due date");
+        System.out.println("Please enter a due date:");
         tempDueDate = input.nextLine();
 
         addItemToList(tempTitle, tempDescription, tempDueDate);
@@ -147,7 +140,7 @@ public class App {
             item.setDescription(tempDescription);
             item.setDueDate(tempDueDate);
             TaskList.addItem(item);
-            System.out.println("Item was created successfully\n\n");
+            System.out.println("Item was created successfully.\n\n");
         }
         catch(IllegalArgumentException ex){
             System.out.println(ex.getMessage());
@@ -169,17 +162,17 @@ public class App {
                 String tempTitle, tempDescription, tempDueDate;
                 int index;
 
-                System.out.println("Which item number would you like to edit");
+                System.out.println("Which item number would you like to edit?");
                 index = input.nextInt();
                 input.nextLine();
 
-                System.out.println("Please enter a title");
+                System.out.println("Please enter a title:");
                 tempTitle = input.nextLine();
 
-                System.out.println("Please enter a description");
+                System.out.println("Please enter a description:");
                 tempDescription = input.nextLine();
 
-                System.out.println("Please enter a due date");
+                System.out.println("Please enter a due date:");
                 tempDueDate = input.nextLine();
 
                 editItem(tempTitle, tempDescription, tempDueDate, index);
