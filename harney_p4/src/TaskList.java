@@ -61,12 +61,7 @@ public class TaskList {
     }
 
     public static boolean newTaskListIsEmpty(){
-        if (getListSize() == 0){
-            return true;
-        }
-        else {
-            return false;
-        }
+        return getListSize() == 0;
     }
 
     public static void completeATask(int index){
@@ -101,16 +96,20 @@ public class TaskList {
     }
 
     public static void saveListToFile() {
-        try (
-                Formatter output = new Formatter("ToDoList.txt")) {
-            for (TaskItem item : List){
-                output.format(item.getDueDate() + "," + item.getDescription() + "," + item.getTitle() + "\n");
+
+        if (getListSize() > 0) {
+            try (
+                    Formatter output = new Formatter("ToDoList.txt")) {
+                for (TaskItem item : List) {
+                    output.format(item.getDueDate() + ";" + item.getDescription() + ";" + item.getTitle() + "\n");
+                }
+                System.out.println("List successfully saved to file.\n");
+            } catch (
+                    IOException ex) {
+                System.out.println("Cannot open the file.\n");
             }
-            System.out.println("List successfully saved to file.\n");
-        } catch (
-                IOException ex) {
-            System.out.println("Cannot open the file.\n");
+        } else {
+            System.out.println("There is no list to be saved. Please add to the list before saving.\n");
         }
     }
-
 }

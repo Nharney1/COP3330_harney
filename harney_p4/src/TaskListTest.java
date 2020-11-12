@@ -1,9 +1,7 @@
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.NoSuchElementException;
-import java.util.Scanner;
+
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -324,6 +322,14 @@ class TaskListTest {
     }
 
     @Test
+    public void savedTaskListCanBeLoaded(){
+        File file = new File("ToDoList.txt");
+
+        assertTrue(file.isFile());
+
+    }
+
+    @Test
     public void completingTaskItemChangesStatus(){
         TaskItem item = new TaskItem();
         item.setTitle("Title 1");
@@ -384,19 +390,5 @@ class TaskListTest {
         TaskList.removeItem(0);
     }
 
-    @Test
-    public void savedTaskListCanBeLoaded(){
-            assertThrows(NoSuchElementException.class, ()-> {
-                Scanner reader;
-                reader = new Scanner(new File("ToDoList.txt"));
-                reader.useDelimiter(",|\\n");
 
-
-                while (reader.hasNextLine()) {
-                    String tempDueDate = reader.next();
-                    String tempDescription = reader.next();
-                    String tempTitle = reader.next();
-                }
-            });
-    }
 }

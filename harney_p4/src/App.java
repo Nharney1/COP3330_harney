@@ -120,14 +120,9 @@ public class App {
 
         String tempTitle, tempDescription, tempDueDate;
 
-        System.out.println("Please enter a title:");
-        tempTitle = input.nextLine();
-
-        System.out.println("Please enter a description:");
-        tempDescription = input.nextLine();
-
-        System.out.println("Please enter a due date:");
-        tempDueDate = input.nextLine();
+        tempTitle = getTitleInput();
+        tempDescription = getDescriptionInput();
+        tempDueDate = getDueDateInput();
 
         addItemToList(tempTitle, tempDescription, tempDueDate);
 
@@ -157,23 +152,13 @@ public class App {
             else {
                 TaskList.printListWithFormat();
 
-                Scanner input = new Scanner(System.in);
-
                 String tempTitle, tempDescription, tempDueDate;
                 int index;
 
-                System.out.println("Which item number would you like to edit?");
-                index = input.nextInt();
-                input.nextLine();
-
-                System.out.println("Please enter a title:");
-                tempTitle = input.nextLine();
-
-                System.out.println("Please enter a description:");
-                tempDescription = input.nextLine();
-
-                System.out.println("Please enter a due date:");
-                tempDueDate = input.nextLine();
+                index = getIndexInput();
+                tempTitle = getTitleInput();
+                tempDescription = getDescriptionInput();
+                tempDueDate = getDueDateInput();
 
                 editItem(tempTitle, tempDescription, tempDueDate, index);
             }
@@ -293,7 +278,7 @@ public class App {
 
         try{
             reader = new Scanner (new File("ToDoList.txt"));
-            reader.useDelimiter(",|\\n");
+            reader.useDelimiter(";|\\n");
 
 
             while(reader.hasNextLine()) {
@@ -316,6 +301,36 @@ public class App {
        catch (Exception ex){
             System.out.println("WARNING: Issue opening the file.\n");
         }
+    }
+
+    private static String getTitleInput(){
+        Scanner input = new Scanner(System.in);
+
+        System.out.println("Please enter a title:");
+        return input.nextLine();
+    }
+
+    private static String getDescriptionInput(){
+        Scanner input = new Scanner(System.in);
+
+        System.out.println("Please enter a description:");
+        return input.nextLine();
+    }
+
+    private static String getDueDateInput(){
+        Scanner input = new Scanner(System.in);
+
+        System.out.println("Please enter a due date:");
+        return input.nextLine();
+    }
+
+    private static int getIndexInput(){
+        Scanner input = new Scanner(System.in);
+
+        System.out.println("Which item number would you like to edit?");
+        int index = input.nextInt();
+        input.nextLine();
+        return index;
     }
 }
 
