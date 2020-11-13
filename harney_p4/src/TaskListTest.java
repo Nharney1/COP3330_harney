@@ -2,7 +2,6 @@ import org.junit.jupiter.api.Test;
 
 import java.io.File;
 
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class TaskListTest {
@@ -324,9 +323,8 @@ class TaskListTest {
     @Test
     public void savedTaskListCanBeLoaded(){
         File file = new File("ToDoList.txt");
-
         assertTrue(file.isFile());
-
+        assertTrue(file.exists());
     }
 
     @Test
@@ -389,6 +387,4 @@ class TaskListTest {
                });
         TaskList.removeItem(0);
     }
-
-
 }

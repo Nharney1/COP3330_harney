@@ -4,6 +4,7 @@ import java.util.InputMismatchException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
+
 public class App {
 
     public static void main(String[] args) {
@@ -283,23 +284,26 @@ public class App {
 
             while(reader.hasNextLine()) {
 
+                int counter = 0;
                 String tempDueDate = reader.next();
                 String tempDescription = reader.next();
                 String tempTitle = reader.next();
+                String completionStatus = reader.next();
 
                 addItemToList(tempTitle, tempDescription, tempDueDate);
 
+                if(completionStatus.equals("COMPLETED")){
+                    TaskList.completeATask(counter);
+                }
+                counter++;
             }
         }
 
         catch(NoSuchElementException ex){
-            //Exception for writing to files
+            //Exceptions for writing to files
         }
         catch(FileNotFoundException ex){
             System.out.println("WARNING: Cannot find the file you have.\n");
-        }
-       catch (Exception ex){
-            System.out.println("WARNING: Issue opening the file.\n");
         }
     }
 

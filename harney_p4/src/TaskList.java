@@ -41,23 +41,18 @@ public class TaskList {
     }
 
     public static String getDescription (int index){
-
             List.get(index);
-
             return List.get(index).getDescription();
     }
 
     public static String getDueDate (int index){
             List.get(index);
-
             return List.get(index).getDueDate();
     }
 
     public static String getTitle(int index){
             List.get(index);
-
             return List.get(index).getTitle();
-
     }
 
     public static boolean newTaskListIsEmpty(){
@@ -66,7 +61,6 @@ public class TaskList {
 
     public static void completeATask(int index){
             List.get(index).completeTask();
-
     }
 
     public static boolean getCompletionStatus(int index) {
@@ -101,7 +95,12 @@ public class TaskList {
             try (
                     Formatter output = new Formatter("ToDoList.txt")) {
                 for (TaskItem item : List) {
-                    output.format(item.getDueDate() + ";" + item.getDescription() + ";" + item.getTitle() + "\n");
+                    if (item.getCompletionStatus()) {
+                        output.format(item.getDueDate() + ";" + item.getDescription() + ";" + item.getTitle() + ";COMPLETED\n");
+                    }
+                    else {
+                        output.format(item.getDueDate() + ";" + item.getDescription() + ";" + item.getTitle() + ";NOT COMPLETED\n");
+                    }
                 }
                 System.out.println("List successfully saved to file.\n");
             } catch (
