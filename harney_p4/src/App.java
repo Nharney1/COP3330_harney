@@ -155,6 +155,7 @@ public class App {
                 int index;
 
                 index = getIndexInput();
+                verifyIndex(index);
                 tempTitle = getTitleInput();
                 tempDescription = getDescriptionInput();
                 tempDueDate = getDueDateInput();
@@ -163,6 +164,8 @@ public class App {
             }
         } catch (InputMismatchException ex){
             System.out.println("ERROR: Please enter your option as a digit.\n");
+        } catch (IndexOutOfBoundsException ex){
+            System.out.println("The item you are trying to edit does not exist.\n");
         }
     }
 
@@ -176,6 +179,12 @@ public class App {
         }
         catch (IllegalArgumentException ex){
             System.out.println(ex.getMessage());
+        }
+    }
+
+    private static void verifyIndex (int index){
+        if (index > TaskList.getListSize()-1){
+            throw new IndexOutOfBoundsException();
         }
     }
 
