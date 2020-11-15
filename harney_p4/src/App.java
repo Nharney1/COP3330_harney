@@ -95,8 +95,6 @@ public class App {
         }
     }
 
-
-
     private static void printTheList(){
         if(TaskList.newTaskListIsEmpty()){
             System.out.println("The list is empty. Please add items.\n");
@@ -281,10 +279,9 @@ public class App {
             reader = new Scanner (new File("ToDoList.txt"));
             reader.useDelimiter(";|\\n");
 
-
+            int counter = 0;
             while(reader.hasNextLine()) {
 
-                int counter = 0;
                 String tempDueDate = reader.next();
                 String tempDescription = reader.next();
                 String tempTitle = reader.next();
@@ -298,12 +295,12 @@ public class App {
                 counter++;
             }
         }
-
         catch(NoSuchElementException ex){
             //Exceptions for writing to files
         }
         catch(FileNotFoundException ex){
             System.out.println("WARNING: Cannot find the file you have.\n");
+            mainMenu();
         }
     }
 
