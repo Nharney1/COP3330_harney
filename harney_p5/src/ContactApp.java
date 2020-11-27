@@ -176,7 +176,7 @@ public class ContactApp extends App {
         if(contactList.size() >0){
             String fileName = getFileNameToSave();
             contactList.saveFile(fileName);
-            System.out.println("List saved to Contact.txt .");
+            System.out.println("List saved.");
         }
         else {
             System.out.println("List not saved. Please add to the list before saving.");
