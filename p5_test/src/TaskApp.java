@@ -44,7 +44,7 @@ public class TaskApp {
     private void actOnMainMenuInput(String input){
         switch (input){
             case "1" -> operationMenu();
-            case "2" -> loadTheFile();
+            case "2" -> taskList.loadFile();
             case "3" -> System.exit(0);
             default -> invalidMainMenuInput();
         }
@@ -229,18 +229,12 @@ public class TaskApp {
 
     private void saveList(){
         if(taskList.size()>0) {
-            String fileName = getFileNameToSaveList();
-            taskList.saveFile(fileName);
-            System.out.println("List saved.");
+            taskList.saveFile();
+            System.out.println("List saved to ToDo.txt .");
         }
         else {
             System.out.println("List not saved. Please add to the list before saving.");
         }
-    }
-
-    private void loadTheFile(){
-        String fileName = getFileNameToLoadFile();
-        taskList.loadFile(fileName);
     }
 
 
@@ -272,16 +266,6 @@ public class TaskApp {
         if (index > taskList.size()-1){
             throw new IndexOutOfBoundsException();
         }
-    }
-
-    private String getFileNameToSaveList(){
-        System.out.print("Where do you want to save the file to? > ");
-        return input.nextLine();
-    }
-
-    private String getFileNameToLoadFile(){
-        System.out.print("Where file do you want to load? > ");
-        return input.nextLine();
     }
 
 

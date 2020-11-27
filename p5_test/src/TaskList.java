@@ -42,6 +42,8 @@ public class TaskList  {
         }
     }
 
+
+
     public void completeItem(int index){
         if (index > list.size() -1){
             throw new IndexOutOfBoundsException("WARNING: The item you are trying to complete does not exist. %n");
@@ -71,9 +73,9 @@ public class TaskList  {
 
     }
 
-    public void saveFile(String fileName){
+    public void saveFile(){
         if(list.size() > 0){
-            try (Formatter output = new Formatter(fileName)){
+            try (Formatter output = new Formatter("ToDo.txt")){
                 for(TaskItem item : list){
                     output.format("%s%n", item.getDueDate());
                     output.format("%s%n", item.getTitle());
@@ -87,7 +89,7 @@ public class TaskList  {
                 }
             }
             catch (IOException ex){
-                System.out.println("Cannot open the file.%n");
+                System.out.println("Cannot open ToDo.txt.%n");
             }
         }
         else {
@@ -95,9 +97,9 @@ public class TaskList  {
         }
     }
 
-    public void loadFile(String fileName){
+    public void loadFile(){
         try {
-            Scanner reader = new Scanner(new File(fileName));
+            Scanner reader = new Scanner(new File("ToDo.txt"));
 
             int counter = 0;
             while(reader.hasNext()){
@@ -116,11 +118,11 @@ public class TaskList  {
             }
             System.out.println("Your file has been loaded.");
         }
-        catch(NoSuchElementException ex){
+        catch (NoSuchElementException ex){
             System.out.println("WARNING: Unable to save the list. Items cannot be found");
         }
         catch(FileNotFoundException ex){
-            System.out.println("WARNING: The file cannot be found");
+            System.out.println("WARNING: The file ToDo.txt cannot be found");
         }
 
     }

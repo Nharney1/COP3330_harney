@@ -129,9 +129,9 @@ public class ContactListTest {
         ContactList contactList = new ContactList();
         ContactItem item = new ContactItem("Jim", "Brown", "  ", "email.com" );
         contactList.add(item);
-        contactList.saveFile("Contact.txt");
+        contactList.saveFile();
         contactList.delete(0);
-        contactList.loadFile("Contact.txt");
+        contactList.loadFile();
 
         assertEquals("Jim",contactList.get(0).getFirstName());
         assertTrue(contactList.get(0).getPhoneNumber().isBlank());
@@ -143,6 +143,6 @@ public class ContactListTest {
         ContactItem item = new ContactItem("Brandon", "Smith", " ", " ");
         itemList.add(item);
         itemList.clearList();
-        assertEquals(itemList.size(), 0);
+        assertTrue(itemList.size() == 0);
     }
 }

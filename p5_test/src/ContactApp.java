@@ -16,34 +16,15 @@ public class ContactApp extends App {
         }
     }
 
-    private void mainMenu(){
+    protected void mainMenu(){
         printMainMenu();
         String initialInput = getMainMenuInput();
         actOnMainMenuInput(initialInput);
     }
-
-    private void operationMenu(){
-        printOperationMenu();
-        String userInput = getOperationMenuInput();
-        actOnOperationMenuInput(userInput);
-    }
-
-    private void printMainMenu(){
-        System.out.println();
-        System.out.println("1) Create a new list");
-        System.out.println("2) Load an existing list");
-        System.out.println("3) Quit");
-    }
-
-    private String getMainMenuInput(){
-        System.out.print(">");
-        return input.nextLine();
-    }
-
     private void actOnMainMenuInput(String input){
         switch (input){
             case "1" -> operationMenu();
-            case "2" -> loadTheList();
+            case "2" -> contactList.loadFile();
             case "3" -> System.exit(0);
             default -> invalidMainMenuInput();
         }
@@ -150,42 +131,36 @@ public class ContactApp extends App {
     private void deleteItem(){
         try {
             if(contactList.isEmpty()){
-                System.out.println("The list is empty. There are no contacts to delete.\n");
+                System.out.println("The list is empty. There are no items to delete.\n");
             }
             else{
                 contactList.viewList();
                 System.out.println();
 
-                System.out.println("Which contact number would you like to delete");
+                System.out.println("Which item number would you like to delete");
                 int index = input.nextInt();
                 input.nextLine();
 
                 contactList.delete(index);
-                System.out.println("Contact deleted");
+                System.out.println("Item deleted");
             }
         } catch(InputMismatchException ex){
-            System.out.println("ERROR: Please enter the contact you want to delete as a digit.\n");
+            System.out.println("ERROR: Please enter the item you want to delete as a digit.\n");
             input.nextLine();
         }
         catch(IndexOutOfBoundsException ex){
-            System.out.println("The contact you are trying to delete does not exist.\n");
+            System.out.println("The item you are trying to delete does not exist.\n");
         }
     }
 
     private void saveList(){
         if(contactList.size() >0){
-            String fileName = getFileNameToSave();
-            contactList.saveFile(fileName);
+            contactList.saveFile();
             System.out.println("List saved to Contact.txt .");
         }
         else {
             System.out.println("List not saved. Please add to the list before saving.");
         }
-    }
-
-    private void loadTheList(){
-        String fileName = getFileNameToLoad();
-        contactList.loadFile(fileName);
     }
 
 
@@ -220,16 +195,6 @@ public class ContactApp extends App {
         if (index > contactList.size()-1){
             throw new IndexOutOfBoundsException();
         }
-    }
-
-    private String getFileNameToSave(){
-        System.out.print("Please enter the name for the file you would like > ");
-        return input.nextLine();
-    }
-
-    private String getFileNameToLoad(){
-        System.out.print("What file would you like to load? > ");
-        return input.nextLine();
     }
 
 }

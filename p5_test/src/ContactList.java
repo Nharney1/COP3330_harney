@@ -3,9 +3,10 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.*;
 
-public class ContactList {
+public class ContactList  {
 
-    private List<ContactItem> list = new ArrayList<>();
+    protected List<ContactItem> list = new ArrayList<>();
+
 
     public ContactItem get(int index){
         return list.get(index);
@@ -23,15 +24,6 @@ public class ContactList {
         list.add(item);
     }
 
-    public void editItem(String firstName, String lastName, String phoneNumber, String email, int index){
-        if (index > list.size() -1){
-            throw new IndexOutOfBoundsException("WARNING: The item you are trying to edit does not exist");
-        }
-        else {
-            list.get(index).updateContactItem(firstName, lastName, phoneNumber, email);
-        }
-    }
-
     public void delete(int index){
         if (index > list.size() -1){
             throw new IndexOutOfBoundsException("WARNING: The item you are trying to delete does not exist. %n");
@@ -41,9 +33,18 @@ public class ContactList {
         }
     }
 
-    public void saveFile(String fileName){
+    public void editItem(String firstName, String lastName, String phoneNumber, String email, int index){
+        if (index > list.size() -1){
+            throw new IndexOutOfBoundsException("WARNING: The item you are trying to edit does not exist");
+        }
+        else {
+            list.get(index).updateContactItem(firstName, lastName, phoneNumber, email);
+        }
+    }
+
+    public void saveFile(){
         if(list.size() > 0){
-            try(Formatter output = new Formatter(fileName)){
+            try(Formatter output = new Formatter("Contact.txt")){
                 for (ContactItem item : list){
                     output.format("%s%n", item.getFirstName());
                     output.format("%s%n", item.getLastName());
@@ -52,7 +53,7 @@ public class ContactList {
                 }
             }
             catch (IOException ex){
-                System.out.println("Cannot open the specified file.%n");
+                System.out.println("Cannot open Contact.txt.%n");
             }
         }
         else{
@@ -60,9 +61,9 @@ public class ContactList {
         }
     }
 
-    public void loadFile(String fileName){
+    public void loadFile(){
         try{
-            Scanner reader = new Scanner(new File(fileName));
+            Scanner reader = new Scanner(new File("Contact.txt"));
 
             while(reader.hasNext()){
                 String firstName = reader.nextLine();
@@ -80,7 +81,7 @@ public class ContactList {
             System.out.println("WARNING: Unable to save the list. Items cannot be found.");
         }
         catch(FileNotFoundException ex){
-            System.out.println("WARNING: The file cannot be found");
+            System.out.println("WARNING: The file Contact.txt cannot be found");
         }
     }
 

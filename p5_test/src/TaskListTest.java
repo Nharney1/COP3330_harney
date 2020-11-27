@@ -224,9 +224,9 @@ public class TaskListTest {
         TaskList itemList = new TaskList();
         TaskItem item = new TaskItem("Item 1", "None", "2022-11-11");
         itemList.add(item);
-        itemList.saveFile("ToDo.txt");
+        itemList.saveFile();
         itemList.delete(0);
-        itemList.loadFile("ToDo.txt");
+        itemList.loadFile();
 
         assertEquals("None", itemList.get(0).getDescription());
     }
